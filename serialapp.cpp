@@ -21,10 +21,10 @@ SerialApp::SerialApp(QString portName, qint32 baudRate, QObject *parent) : QObje
     m_serial = new QSerialPort(this);
 
     m_serial->setPortName(portName);
-    m_serial->setBaudRate(baudRate);
     connect(m_serial, SIGNAL(readyRead()), this, SLOT(print()));
 
     if(m_serial->open(QIODevice::ReadOnly)){
+        m_serial->setBaudRate(baudRate);
         qDebug() << "Serial port " << portName << "@" << baudRate << " is open for reading";
     }else{
         qDebug() << "Could not open " << portName << " for reading";
